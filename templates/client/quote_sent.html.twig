@@ -1,0 +1,15 @@
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@consulting.quote.title'|trans }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset('bundles/consulting/css/consulting.css') }}">{% endblock %}
+
+{% block content %}
+<section class="consulting consulting-quote-sent">
+    <header class="consulting-head">
+        <h1>{{ '@consulting.quote.thanks'|trans({name: quote.name}) }}</h1>
+        <p class="consulting-lead">{{ '@consulting.quote.thanks_lead'|trans }}</p>
+    </header>
+    <p><a href="{{ path('consulting_offerings') }}">← {{ '@consulting.offerings.title'|trans }}</a></p>
+</section>
+{% endblock %}

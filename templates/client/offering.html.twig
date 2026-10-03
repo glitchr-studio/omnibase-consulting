@@ -1,0 +1,41 @@
+{# One offering: its text, the facts, its price, the quote request (and, once the marketplace sells hours, the hours). #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ offering.title }}{% endblock %}
+{% block description %}{{ offering.summary ?? (offering.description|striptags|slice(0, 250)) }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset('bundles/consulting/css/consulting.css') }}">{% include '@Consulting/client/_jsonld.html.twig' %}{% endblock %}
+
+{% block content %}
+<section class="consulting consulting-offering">
+    <p class="consulting-back"><a href="{{ path('consulting_offerings') }}">← {{ '@consulting.offerings.title'|trans }}</a></p>
+    <header class="consulting-head">
+        <p class="consulting-kind">{{ offering.activity.label|trans({}, 'consulting') }}</p>
+        <h1>{{ offering.title }}</h1>
+        {% if offering.summary %}<p class="consulting-lead">{{ offering.summary }}</p>{% endif %}
+    </header>
+    <div class="consulting-body">
+        <div class="consulting-prose">
+            {% if offering.imageUrl %}<img class="consulting-image" src="{{ offering.imageUrl }}" alt="" loading="lazy">{% endif %}
+            {% if offering.html %}{{ offering.description|raw }}{% elseif offering.description %}{% for p in offering.description|split("\n\n") %}<p>{{ p|nl2br }}</p>{% endfor %}{% endif %}
+        </div>
+        <aside class="consulting-aside">
+            <dl class="consulting-facts">
+                {% if offering.audience %}<div><dt>{{ '@consulting.offering.audience'|trans }}</dt><dd>{{ offering.audience }}</dd></div>{% endif %}
+                {% if offering.format %}<div><dt>{{ '@consulting.offering.format'|trans }}</dt><dd>{{ offering.format }}</dd></div>{% endif %}
+                {% if offering.duration %}<div><dt>{{ '@consulting.offering.duration'|trans }}</dt><dd>{{ offering.duration }}</dd></div>{% endif %}
+                {% if offering.languages %}<div><dt>{{ '@consulting.offering.languages'|trans }}</dt><dd>{{ offering.languages }}</dd></div>{% endif %}
+                {% if offering.price %}<div><dt>{{ '@consulting.offering.price'|trans }}</dt><dd>{{ offering.price }}</dd></div>{% endif %}
+            </dl>
+            {% if offering.quotable %}<a class="consulting-button" href="{{ path('consulting_quote', {offering: offering.slug}) }}">{{ '@consulting.quote.ask'|trans }}</a>{% endif %}
+            {% if can_pay %}<p class="consulting-note">{{ '@consulting.offering.hours'|trans({count: offering.hours}) }}</p>{% endif %}
+        </aside>
+    </div>
+    {% if others %}
+    <section class="consulting-more">
+        <h2>{{ '@consulting.offerings.others'|trans }}</h2>
+        <div class="consulting-grid">{% for offering in others %}{% include '@Consulting/client/_offering.html.twig' %}{% endfor %}</div>
+    </section>
+    {% endif %}
+</section>
+{% endblock %}

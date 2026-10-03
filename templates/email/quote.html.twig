@@ -1,0 +1,11 @@
+{# The quote request, as it reaches the site's address. #}
+<p><b>{{ quote.name }}</b>{% if quote.organisation %} — {{ quote.organisation }}{% endif %}<br>
+<a href="mailto:{{ quote.email }}">{{ quote.email }}</a>{% if quote.phone %} · {{ quote.phone }}{% endif %}</p>
+<table cellpadding="4">
+    <tr><td>{{ '@consulting.quote.fields.offering'|trans }}</td><td>{{ quote.offering ? quote.offering.title : '@consulting.quote.fields.offering_none'|trans }}</td></tr>
+    {% if quote.participants %}<tr><td>{{ '@consulting.quote.fields.participants'|trans }}</td><td>{{ quote.participants }}</td></tr>{% endif %}
+    {% if quote.dates %}<tr><td>{{ '@consulting.quote.fields.dates'|trans }}</td><td>{{ quote.dates }}</td></tr>{% endif %}
+    {% if quote.location %}<tr><td>{{ '@consulting.quote.fields.location'|trans }}</td><td>{{ quote.location }}</td></tr>{% endif %}
+    {% if quote.budget %}<tr><td>{{ '@consulting.quote.fields.budget'|trans }}</td><td>{{ quote.budget }}</td></tr>{% endif %}
+</table>
+<p>{{ quote.message|nl2br }}</p>

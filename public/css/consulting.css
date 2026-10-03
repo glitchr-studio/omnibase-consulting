@@ -1,0 +1,50 @@
+/* omnibase/consulting: the services, an offering's page, the quote request.
+   Neutral, on the host's custom properties when it defines them
+   (--consulting-accent, --consulting-on-accent, --consulting-ink,
+   --consulting-soft, --consulting-line, --consulting-surface,
+   --consulting-font-display, --consulting-measure). */
+:where(.consulting, [class^="consulting-"], [class*=" consulting-"]) {
+    --_accent: var(--consulting-accent, #2f5d8a);
+    --_on-accent: var(--consulting-on-accent, #fff);
+    --_ink: var(--consulting-ink, inherit);
+    --_soft: var(--consulting-soft, #6b6b6b);
+    --_line: var(--consulting-line, rgba(127,127,127,.28));
+    --_surface: var(--consulting-surface, rgba(127,127,127,.07));
+    --_display: var(--consulting-font-display, inherit);
+}
+.consulting { width: 100%; max-width: var(--consulting-measure, 64rem); margin: 0 auto; padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3.5vw, 2.5rem) clamp(3rem, 6vw, 4.5rem); color: var(--_ink); }
+.consulting a { color: var(--_accent); }
+.consulting-head { margin-bottom: 1.75rem; }
+.consulting-head h1 { margin: 0 0 .4rem; font-family: var(--_display); font-size: clamp(1.9rem, 3.6vw, 2.8rem); line-height: 1.1; }
+.consulting-lead { margin: 0; max-width: 40rem; color: var(--_soft); }
+.consulting-back { margin: 0 0 1rem; font-size: .9rem; }
+.consulting-kind { margin: 0 0 .4rem; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--_soft); }
+.consulting-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr)); gap: 1.25rem; }
+.consulting-card { display: flex; flex-direction: column; padding: 1.2rem 1.3rem; border: 1px solid var(--_line); border-radius: .5rem; }
+.consulting-card h3 { margin: 0 0 .5rem; font-family: var(--_display); font-size: 1.2rem; line-height: 1.25; }
+.consulting-card h3 a { color: inherit; text-decoration: none; }
+.consulting-card > p { margin: 0 0 .75rem; }
+.consulting-card-image { width: calc(100% + 2.6rem); margin: -1.2rem -1.3rem 1rem; aspect-ratio: 16 / 9; object-fit: cover; border-radius: .5rem .5rem 0 0; }
+.consulting-facts { display: grid; gap: .45rem; margin: auto 0 0; font-size: .9rem; }
+.consulting-facts div { display: grid; grid-template-columns: 6.5rem 1fr; gap: .5rem; }
+.consulting-facts dt { color: var(--_soft); }
+.consulting-facts dd { margin: 0; }
+.consulting-body { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: 2rem; align-items: start; }
+.consulting-prose { line-height: 1.7; }
+.consulting-prose img { max-width: 100%; height: auto; }
+.consulting-image { width: 100%; border-radius: .4rem; margin-bottom: 1rem; }
+.consulting-aside { position: sticky; top: 6rem; display: grid; gap: 1rem; padding: 1.1rem 1.2rem; border: 1px solid var(--_line); border-radius: .5rem; background: var(--_surface); }
+.consulting-button { display: inline-flex; justify-content: center; align-items: center; min-height: 2.6rem; padding: .45rem 1.2rem; border: 1px solid var(--_accent); border-radius: .4rem; background: var(--_accent); color: var(--_on-accent) !important; font: inherit; text-decoration: none; cursor: pointer; }
+.consulting-cta { margin-top: 2rem; }
+.consulting-more { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--_line); }
+.consulting-more h2 { margin: 0 0 1rem; font-family: var(--_display); font-size: 1.3rem; }
+.consulting-note, .consulting-empty { color: var(--_soft); font-size: .9rem; }
+.consulting-form { display: grid; gap: 1.25rem; max-width: 46rem; }
+.consulting-form fieldset { margin: 0; padding: 1rem 1.2rem; border: 1px solid var(--_line); border-radius: .5rem; }
+.consulting-form legend { padding: 0 .4rem; font-weight: 600; }
+.consulting-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+.consulting-notice { margin: 0; font-size: .82rem; color: var(--_soft); line-height: 1.5; }
+@media (max-width: 48rem) {
+    .consulting-body, .consulting-pair { grid-template-columns: 1fr; }
+    .consulting-aside { position: static; }
+}

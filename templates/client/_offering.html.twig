@@ -1,0 +1,12 @@
+{# An offering as a list shows it: its title, its line, for whom, how, its price; to its page. `offering`. #}
+<article class="consulting-card">
+    {% if offering.imageUrl %}<img class="consulting-card-image" src="{{ offering.imageUrl }}" alt="" loading="lazy">{% endif %}
+    <p class="consulting-kind">{{ offering.activity.label|trans({}, 'consulting') }}</p>
+    <h3><a href="{{ path('consulting_offering', {slug: offering.slug}) }}">{{ offering.title }}</a></h3>
+    {% if offering.summary %}<p>{{ offering.summary }}</p>{% endif %}
+    <dl class="consulting-facts">
+        {% if offering.audience %}<div><dt>{{ '@consulting.offering.audience'|trans }}</dt><dd>{{ offering.audience }}</dd></div>{% endif %}
+        {% if offering.duration %}<div><dt>{{ '@consulting.offering.duration'|trans }}</dt><dd>{{ offering.duration }}</dd></div>{% endif %}
+        {% if offering.price %}<div><dt>{{ '@consulting.offering.price'|trans }}</dt><dd>{{ offering.price }}</dd></div>{% endif %}
+    </dl>
+</article>

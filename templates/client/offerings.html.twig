@@ -1,0 +1,25 @@
+{#
+ # The services: what is offered, each with its line, for whom, how long,
+ # its price; then the way to ask for a quote.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@consulting.offerings.title'|trans }}{% endblock %}
+{% block description %}{{ '@consulting.offerings.description'|trans }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset('bundles/consulting/css/consulting.css') }}">{% include '@Consulting/client/_jsonld.html.twig' %}{% endblock %}
+
+{% block content %}
+<section class="consulting consulting-offerings">
+    <header class="consulting-head">
+        <h1>{{ '@consulting.offerings.title'|trans }}</h1>
+        <p class="consulting-lead">{{ '@consulting.offerings.lead'|trans }}</p>
+    </header>
+    {% if offerings %}
+    <div class="consulting-grid">{% for offering in offerings %}{% include '@Consulting/client/_offering.html.twig' %}{% endfor %}</div>
+    {% else %}
+    <p class="consulting-empty">{{ '@consulting.offerings.empty'|trans }}</p>
+    {% endif %}
+    <p class="consulting-cta"><a class="consulting-button" href="{{ path('consulting_quote') }}">{{ '@consulting.quote.ask'|trans }}</a></p>
+</section>
+{% endblock %}

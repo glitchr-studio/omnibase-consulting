@@ -1,0 +1,38 @@
+{#
+ # The quote request: omnibase's contact form with what a quote needs, and
+ # its notice - what is kept, how long, why, and the visitor's rights.
+ #}
+{% extends 'layout1.html.twig' %}
+
+{% block title %}{{ '@consulting.quote.title'|trans }}{% endblock %}
+{% block description %}{{ '@consulting.quote.description'|trans }}{% endblock %}
+
+{% block stylesheets %}{{ parent() }}<link rel="stylesheet" href="{{ asset('bundles/consulting/css/consulting.css') }}">{% endblock %}
+
+{% block content %}
+<section class="consulting consulting-quote">
+    <header class="consulting-head">
+        <h1>{{ '@consulting.quote.title'|trans }}</h1>
+        <p class="consulting-lead">{{ offering ? '@consulting.quote.lead_for'|trans({title: offering.title}) : '@consulting.quote.lead'|trans }}</p>
+    </header>
+    {{ form_start(form, {attr: {class: 'consulting-form', novalidate: 'novalidate'}}) }}
+        {{ form_errors(form) }}
+        <fieldset>
+            <legend>{{ '@consulting.quote.request'|trans }}</legend>
+            {{ form_row(form.offering) }}
+            <div class="consulting-pair">{{ form_row(form.participants) }}{{ form_row(form.dates) }}</div>
+            <div class="consulting-pair">{{ form_row(form.location) }}{{ form_row(form.budget) }}</div>
+            {{ form_row(form.message, {label: '@consulting.quote.fields.message'|trans}) }}
+        </fieldset>
+        <fieldset>
+            <legend>{{ '@consulting.quote.you'|trans }}</legend>
+            <div class="consulting-pair">{{ form_row(form.name, {label: '@consulting.quote.fields.name'|trans}) }}{{ form_row(form.organisation) }}</div>
+            <div class="consulting-pair">{{ form_row(form.email, {label: '@consulting.quote.fields.email'|trans}) }}{{ form_row(form.phone, {label: '@consulting.quote.fields.phone'|trans}) }}</div>
+        </fieldset>
+        <p class="consulting-notice">{{ '@consulting.quote.notice'|trans({months: retention}) }}</p>
+        {{ form_row(form.consent) }}
+        {{ form_rest(form) }}
+        <button type="submit" class="consulting-button">{{ '@consulting.quote.send'|trans }}</button>
+    {{ form_end(form) }}
+</section>
+{% endblock %}

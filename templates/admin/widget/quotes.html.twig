@@ -1,0 +1,31 @@
+{# Quote requests waiting for an answer (Base\Consulting\Admin\Widget\QuoteRequestsWidgetType). #}
+<div class="analytics-card card consulting-quotes">
+    <div class="analytics-card-header">
+        <h2 class="analytics-card-title">{{ widget.label|trans({}, 'admin') }}</h2>
+    </div>
+    <div class="consulting-quotes-body">
+        <a class="consulting-quotes-count" href="{{ path('admin_crud_quote_requests_index') }}">
+            <strong>{{ count }}</strong>
+            <span>{{ '@consulting.admin.widget.new'|trans({count: count}) }}</span>
+        </a>
+        {% if quotes %}
+        <ul class="consulting-quotes-list">
+            {% for quote in quotes %}
+            <li><a href="{{ path('admin_crud_quote_requests_detail', {entityId: quote.id}) }}"><b>{{ quote.createdAt|format_datetime('short', 'short') }}</b> · {{ quote.name }}{% if quote.organisation %} — {{ quote.organisation }}{% endif %}<br><small>{{ quote.offering ? quote.offering.title : '@consulting.quote.fields.offering_none'|trans }}</small></a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="consulting-quotes-empty">{{ '@consulting.admin.widget.none'|trans }}</p>
+        {% endif %}
+    </div>
+</div>
+<style>
+    .consulting-quotes-body { display: grid; gap: .75rem; padding: 0 1rem 1rem; }
+    .consulting-quotes-count { display: grid; gap: .2rem; padding: .9rem 1rem; border-radius: .75rem; background: rgba(127,127,127,.08); color: inherit; text-decoration: none; }
+    .consulting-quotes-count strong { font-size: 1.6rem; line-height: 1.1; }
+    .consulting-quotes-count span { font-size: .8rem; opacity: .75; }
+    .consulting-quotes-list { margin: 0; padding: 0; list-style: none; display: grid; gap: .4rem; font-size: .85rem; }
+    .consulting-quotes-list a { color: inherit; text-decoration: none; }
+    .consulting-quotes-list small { opacity: .65; }
+    .consulting-quotes-empty { margin: 0; font-size: .85rem; opacity: .7; }
+</style>
