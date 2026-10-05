@@ -68,14 +68,9 @@ class QuoteRequestCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $statuses = [];
-        foreach (QuoteStatus::cases() as $status) {
-            $statuses[$this->translator?->trans($status->label(), [], 'consulting') ?? $status->value] = $status->value;
-        }
-
         yield IdField::new('id')->onlyOnIndex();
         yield DateTimeField::new('createdAt', '@consulting.admin.quote.created_at')->setDisabled();
-        yield SelectField::new('statusValue', '@consulting.admin.quote.status')->setChoices($statuses)->setColumns(3);
+        yield SelectField::new('status', '@consulting.admin.quote.status')->setColumns(3); // the enum's cases, each naming itself
         yield AssociationField::new('offering', '@consulting.admin.quote.offering')->setColumns(5)->setRequired(false);
         yield TextField::new('name', '@consulting.admin.quote.name')->setColumns(4)->setDisabled();
         yield TextField::new('email', '@consulting.admin.quote.email')->setColumns(4)->setDisabled();

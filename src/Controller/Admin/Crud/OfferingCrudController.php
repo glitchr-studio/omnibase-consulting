@@ -4,6 +4,7 @@ namespace Base\Consulting\Controller\Admin\Crud;
 
 use Base\Admin\Controller\AbstractCrudController;
 use Base\Consulting\Entity\Offering;
+use Base\Consulting\Enum\Activity;
 use Base\Consulting\Service\RegulatedActivityGuard;
 use Base\Field\BooleanField;
 use Base\Field\EditorField;
@@ -54,7 +55,8 @@ class OfferingCrudController extends AbstractCrudController
 
         yield IdField::new('id')->onlyOnIndex();
         yield TextField::new('title', '@consulting.admin.offering.title')->setColumns(8);
-        $activity = SelectField::new('activityValue', '@consulting.admin.offering.activity')->setChoices($activities)->setColumns(4);
+        // The enum's cases, among those the guard allows: the record receives the case.
+        $activity = SelectField::new('activity', '@consulting.admin.offering.activity')->setClass(Activity::class)->setChoices($activities)->setColumns(4);
         yield $this->guard?->isEnabled() ? $activity->setHelp('@consulting.admin.offering.activity_guarded') : $activity;
         yield SlugField::new('slug')->setColumns(6)->hideOnIndex();
         yield TextareaField::new('summary', '@consulting.admin.offering.summary')->setRequired(false)->hideOnIndex();

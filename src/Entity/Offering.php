@@ -39,9 +39,8 @@ class Offering
     #[ORM\Column(length: 120, unique: true)]
     protected ?string $slug = null;
 
-    /** The Activity's value: a string column, as omnibase's Uploader rebuilds an entity's previous state from raw values. */
-    #[ORM\Column(type: 'string', length: 32)]
-    protected string $activity = 'training';
+    #[ORM\Column(type: 'string', length: 32, enumType: Activity::class)]
+    protected Activity $activity = Activity::TRAINING;
 
     /** A line: the card's text, the page's description. */
     #[ORM\Column(type: 'text', nullable: true)]
@@ -91,7 +90,7 @@ class Offering
 
     public function __construct(?string $title = null, Activity $activity = Activity::TRAINING)
     {
-        $this->activity = $activity->value;
+        $this->activity = $activity;
         $this->setTitle($title);
     }
 
@@ -116,11 +115,8 @@ class Offering
     public function getSlug(): ?string { return $this->slug; }
     public function setSlug(?string $slug): self { $this->slug = $slug ? (new AsciiSlugger())->slug($slug)->lower()->truncate(120)->toString() : $this->slug; return $this; }
 
-    public function getActivity(): Activity { return Activity::tryFrom($this->activity) ?? Activity::OTHER; }
-    public function setActivity(Activity|string $activity): self { $this->activity = ($activity instanceof Activity ? $activity : (Activity::tryFrom($activity) ?? Activity::OTHER))->value; return $this; }
-    /** The activity as the back office's select reads and writes it. */
-    public function getActivityValue(): string { return $this->activity; }
-    public function setActivityValue(?string $activity): self { return $this->setActivity((string) $activity); }
+    public function getActivity(): Activity { return $this->activity; }
+    public function setActivity(Activity|string $activity): self { $this->activity = $activity instanceof Activity ? $activity : (Activity::tryFrom($activity) ?? Activity::OTHER); return $this; }
 
     public function getSummary(): ?string { return $this->summary; }
     public function setSummary(?string $summary): self { $this->summary = $summary ? trim($summary) : null; return $this; }

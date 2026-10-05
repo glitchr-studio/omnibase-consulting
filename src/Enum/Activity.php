@@ -2,6 +2,9 @@
 
 namespace Base\Consulting\Enum;
 
+use Symfony\Contracts\Translation\TranslatableInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 /**
  * What an offering is, as the law sees it. Training, documentary
  * information (art. 66-1 of the law of 31 December 1971), writing content,
@@ -9,7 +12,7 @@ namespace Base\Consulting\Enum;
  * and the drafting of deeds for others are not (art. 54): the
  * RegulatedActivityGuard keeps them for a status that allows them.
  */
-enum Activity: string
+enum Activity: string implements TranslatableInterface
 {
     case TRAINING = 'training';
     case TALK = 'talk';
@@ -29,5 +32,11 @@ enum Activity: string
     public function isRegulated(): bool
     {
         return \in_array($this, [self::LEGAL_CONSULTATION, self::DEED_DRAFTING], true);
+    }
+
+    /** Its name in the `consulting` domain: what a select of the back office shows. */
+    public function trans(TranslatorInterface $translator, ?string $locale = null): string
+    {
+        return $translator->trans($this->label(), [], 'consulting', $locale);
     }
 }

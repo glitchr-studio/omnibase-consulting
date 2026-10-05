@@ -83,9 +83,6 @@ class QuoteRequest
 
     public function getStatus(): QuoteStatus { return $this->status; }
     public function setStatus(QuoteStatus|string $status): self { $this->status = $status instanceof QuoteStatus ? $status : (QuoteStatus::tryFrom($status) ?? QuoteStatus::NEW); return $this; }
-    /** The status as the back office's select reads and writes it. */
-    public function getStatusValue(): string { return $this->status->value; }
-    public function setStatusValue(?string $status): self { return $this->setStatus((string) $status); }
 
     public function getName(): string { return $this->name; }
     public function setName(?string $name): self { $this->name = trim((string) $name); return $this; }

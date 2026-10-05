@@ -22,7 +22,7 @@ final class RegulatedActivityValidator extends ConstraintValidator
             return;
         }
         $this->context->buildViolation($this->translator?->trans($reason, [], 'consulting') ?? $reason)
-            ->atPath('activityValue')
+            ->atPath('activity')
             ->addViolation();
     }
 }
