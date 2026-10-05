@@ -33,6 +33,8 @@ composer require omnibase/consulting:dev-main
 ## Tests
 
 `vendor/bin/phpunit` (or `php vendor/bin/phpunit -c vendor/omnibase/consulting/phpunit.xml.dist`
-inside a host): the guard off, on, lifted by a status, and the credit bridge.
+inside a host): the guard off, on, lifted by a status, and the credit bridge;
+inside a host only, who writes in the back office
+(`tests/Controller/Admin/OpenToAdminsTest`).
 
 License: LGPL-3.0-or-later.

@@ -35,3 +35,14 @@ the visitor. A robot that fills the trap is thanked; nothing is kept nor
 sent. The notice under the form says what is kept, why, for how long
 (`retention_months`) and how to have it removed; `consulting:purge` keeps
 that promise.
+
+## Who writes in the back office
+
+The two screens (`OfferingCrudController`, `QuoteRequestCrudController`) are
+the site's administrator's (`ROLE_ADMIN`: the professional whose site it
+is), not the super-admin's only: they carry omnibase/admin's
+`#[OpenToAdmins]` - creating, editing and deleting a service; annotating,
+deleting a quote request and its two buttons, `answered` and `archive`. The
+attribute needs an omnibase/admin that has it (main from 7474f85); on an
+older one it is ignored and the screens are the super-admin's to write, as
+they were.

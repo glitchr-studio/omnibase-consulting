@@ -3,6 +3,7 @@
 namespace Base\Consulting\Controller\Admin\Crud;
 
 use Base\Admin\Attribute\AdminAction;
+use Base\Admin\Attribute\OpenToAdmins;
 use Base\Admin\Config\Action;
 use Base\Admin\Config\Actions;
 use Base\Admin\Config\Crud;
@@ -25,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * The quote requests from the site, read and followed: answered, archived,
  * a note of what was answered. They come from the site's form only.
  */
+#[OpenToAdmins(actions: ['answered', 'archive'])]
 class QuoteRequestCrudController extends AbstractCrudController
 {
     private ?TranslatorInterface $translator = null;

@@ -2,6 +2,7 @@
 
 namespace Base\Consulting\Controller\Admin\Crud;
 
+use Base\Admin\Attribute\OpenToAdmins;
 use Base\Admin\Controller\AbstractCrudController;
 use Base\Consulting\Entity\Offering;
 use Base\Consulting\Enum\Activity;
@@ -24,6 +25,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * how long, its price as printed, a package of hours, a picture, whether a
  * quote may be asked.
  */
+#[OpenToAdmins]
 class OfferingCrudController extends AbstractCrudController
 {
     private ?TranslatorInterface $translator = null;
