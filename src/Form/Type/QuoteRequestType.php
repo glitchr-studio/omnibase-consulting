@@ -15,9 +15,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * The quote request: omnibase's contact form (Base\Form\Type\ContactType:
- * name, e-mail, phone, message, the robots' trap) with what a quote needs
- * on top - the offering, the organisation, the participants, the dates,
- * the place, the budget - and the notice to accept.
+ * name, e-mail, phone, message) with what a quote needs on top - the
+ * offering, the organisation, the participants, the dates, the place, the
+ * budget - and the notice to accept. Guarded as glitchr/omnibase guards a
+ * form (option `guard`, Base\Service\FormGuard): a trap, the time it takes,
+ * the lists, the captcha when glitchr/omniguard has one - in place of the
+ * contact form's own `website` trap.
  */
 class QuoteRequestType extends AbstractType
 {
@@ -34,7 +37,8 @@ class QuoteRequestType extends AbstractType
             'subject' => false,
             'attachments' => false,
             'buttons' => false,
-            'trap' => true,
+            'trap' => false,
+            'guard' => ['action' => 'quote'],
         ]);
     }
 

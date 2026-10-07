@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * What the quote request form sends: omnibase's contact model (a name, an
- * e-mail, a phone, the message, the robots' trap) and what a quote needs -
+ * e-mail, a phone, the message) and what a quote needs -
  * the offering, the organisation, how many people, when, where, the budget,
  * and the notice read and accepted.
  */

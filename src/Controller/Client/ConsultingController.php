@@ -24,8 +24,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * The services: what is offered (/services), each one's page, and the quote
  * request - omnibase's contact form with what a quote needs, kept for the
- * back office and sent to the site's address. A robot that fills the trap
- * is thanked and nothing is kept.
+ * back office and sent to the site's address. The form's guard (glitchr/omnibase's
+ * option `guard`) refuses a robot before anything is kept.
  */
 class ConsultingController extends AbstractController
 {
@@ -80,18 +80,15 @@ class ConsultingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // A filled trap is a robot: thanked all the same, nothing kept nor sent.
-            if (!$model->isRobot()) {
-                $quote = $model->toQuoteRequest($request->getLocale());
-                $entityManager->persist($quote);
-                $entityManager->flush();
-                $mailer->send((new TemplatedEmail())
-                    ->to($recipient)
-                    ->replyTo(new Address((string) $model->email, (string) $model->name))
-                    ->subject($translator->trans('quote.mail.subject', ['name' => $model->name, 'offering' => $model->offering?->getTitle() ?? '—'], 'consulting'))
-                    ->htmlTemplate('@Consulting/email/quote.html.twig')
-                    ->context(['quote' => $quote]));
-            }
+            $quote = $model->toQuoteRequest($request->getLocale());
+            $entityManager->persist($quote);
+            $entityManager->flush();
+            $mailer->send((new TemplatedEmail())
+                ->to($recipient)
+                ->replyTo(new Address((string) $model->email, (string) $model->name))
+                ->subject($translator->trans('quote.mail.subject', ['name' => $model->name, 'offering' => $model->offering?->getTitle() ?? '—'], 'consulting'))
+                ->htmlTemplate('@Consulting/email/quote.html.twig')
+                ->context(['quote' => $quote]));
 
             return $this->render('@Consulting/client/quote_sent.html.twig', ['quote' => $model]);
         }
