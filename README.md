@@ -37,4 +37,4 @@ inside a host): the guard off, on, lifted by a status, and the credit bridge;
 inside a host only, who writes in the back office
 (`tests/Controller/Admin/OpenToAdminsTest`).
 
-License: LGPL-3.0-or-later.
+License: MIT since 2026-10-09; earlier versions remain published under LGPL-3.0-or-later.

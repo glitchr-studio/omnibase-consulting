@@ -2,7 +2,7 @@
     "name": "omnibase/consulting",
     "description": "Consulting for omnibase: an independent professional's services (Offering) presented on their site, the quote request on omnibase's contact model with its notice, kept and answered from the back office; a RegulatedActivityGuard that keeps an offering clear of what a regulated profession alone may do; the hook for hours paid through omnibase/marketplace's Credit.",
     "type": "symfony-bundle",
-    "license": "LGPL-3.0-or-later",
+    "license": "MIT",
     "keywords": ["omnibase", "consulting", "services", "quote", "freelance"],
     "authors": [{"name": "Marco Meyer", "email": "marco.meyer@glitchr.io"}],
     "require": {
