@@ -25,7 +25,7 @@ notice; its model `Form\Model\QuoteRequestModel` extends
 It is guarded as glitchr/omnibase guards a form - the option `guard`
 (`action: quote`; glitchr/omnibase's `docs/20-architecture/guard.md`): a
 trap, the time it takes (a signed stamp), the lists of `base.guard.reputation`,
-the captcha when the site has glitchr/omniguard. Without omniguard, the trap
+the captcha when the site has glitchr/omnishield. Without omnishield, the trap
 and the time alone. A robot is refused on the form, before anything is kept.
 
 ```php

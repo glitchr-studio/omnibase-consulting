@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * offering, the organisation, the participants, the dates, the place, the
  * budget - and the notice to accept. Guarded as glitchr/omnibase guards a
  * form (option `guard`, Base\Service\FormGuard): a trap, the time it takes,
- * the lists, the captcha when glitchr/omniguard has one - in place of the
+ * the lists, the captcha when glitchr/omnishield has one - in place of the
  * contact form's own `website` trap.
  */
 class QuoteRequestType extends AbstractType

@@ -13,9 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
  * The quote request is guarded as glitchr/omnibase guards a form (option `guard`, action "quote"), in
  * place of the contact form's own `website` trap: a filled trap, a form sent faster than its delay and
  * a missing captcha token are refused on the form; a request sent as a person sends it goes through.
- * Without a captcha (no glitchr/omniguard, or none configured: `challenge: false`), the trap and the
- * time alone. Run by a host application's PHPUnit, its test environment's captcha being omniguard's
- * "fixed" gateway (token omniguard-fixed-token).
+ * Without a captcha (no glitchr/omnishield, or none configured: `challenge: false`), the trap and the
+ * time alone. Run by a host application's PHPUnit, its test environment's captcha being omnishield's
+ * "fixed" gateway (token omnishield-fixed-token).
  */
 final class QuoteRequestGuardTest extends KernelTestCase
 {
@@ -55,7 +55,7 @@ final class QuoteRequestGuardTest extends KernelTestCase
             'guard_opened' => static::getContainer()->get(FormGuard::class)->stamp(time() - 10),
         ];
         if ($form->has('guard_captcha')) {
-            $data['guard_captcha'] = 'omniguard-fixed-token';
+            $data['guard_captcha'] = (class_exists(\Omnishield\Testing\FixedGateway::class) ? \Omnishield\Testing\FixedGateway::TOKEN : 'omniguard-fixed-token'); // omnishield's "fixed" test gateway, or omniguard's on a host not moved to omnishield yet.
         }
         $form->submit(array_filter($overrides + $data, static fn ($value) => null !== $value));
 
@@ -106,7 +106,7 @@ final class QuoteRequestGuardTest extends KernelTestCase
     {
         $form = $this->form();
         if (!$form->has('guard_captcha')) {
-            self::markTestSkipped('The host application has no captcha (glitchr/omniguard).');
+            self::markTestSkipped('The host application has no captcha (glitchr/omnishield).');
         }
         $this->send($form, ['guard_captcha' => '']);
         self::assertFalse($form->isValid());
