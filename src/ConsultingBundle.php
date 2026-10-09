@@ -11,9 +11,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * offer (Offering: a workshop, a keynote, a training, a consultation - who
  * it is for, how it runs, its price as it should be printed), the quote
  * request on omnibase's contact model (QuoteRequest, kept and answered from
- * the back office), and, when the site's profession calls for it, the
- * RegulatedActivityGuard: no offering of what only a regulated profession
- * may do. Hours paid in advance will be omnibase/marketplace Credits.
+ * the back office), and the rules an offering keeps that the site or a
+ * profession adds (Offering\OfferingRuleInterface: a jurist's, from
+ * omnibase/legal). Hours paid in advance will be omnibase/marketplace Credits.
  */
 class ConsultingBundle extends AbstractBaseBundle
 {

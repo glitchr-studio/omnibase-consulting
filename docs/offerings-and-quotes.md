@@ -3,7 +3,7 @@
 ## Offering
 
 `title`, `slug`, `activity` (`Enum\Activity`: training, talk, consulting,
-information, writing, legal_consultation, deed_drafting, other), `summary`,
+information, writing, other), `summary`,
 `description` (the back office's editor, or plain text), `audience`,
 `format`, `duration`, `price` (as printed: "On quote"), `hours` (a package
 sold by the hour, once the marketplace does), `languages`, `image`,

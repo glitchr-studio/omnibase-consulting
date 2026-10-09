@@ -23,7 +23,7 @@ class ConsultingExtension extends AbstractBaseExtension
         $configuration = new ConsultingConfiguration();
         $config = (new Processor())->processConfiguration($configuration, $configs);
 
-        // Flat parameters: consulting.recipient, consulting.regulated_activity_guard...
+        // Flat parameters: consulting.recipient, consulting.provider...
         $this->setConfiguration($container, $config, $configuration->getTreeBuilder()->buildTree()->getName());
     }
 }

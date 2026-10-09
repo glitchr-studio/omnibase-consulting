@@ -4,13 +4,7 @@ activity:
   consulting: "Beratung"
   information: "Dokumentarische Information"
   writing: "Texterstellung"
-  legal_consultation: "Individuelle Rechtsberatung"
-  deed_drafting: "Urkundenentwurf für Dritte"
   other: "Sonstiges"
-guard:
-  legal_consultation: "Individuelle Rechtsberatung ist den dazu befugten Berufen vorbehalten (französisches Gesetz vom 31. Dezember 1971, Art. 54 ff.)."
-  deed_drafting: "Der Entwurf von Urkunden für Dritte ist den dazu befugten Berufen vorbehalten."
-  wording: "Der Text kündigt eine individuelle Rechtsberatung an, die befugten Berufen vorbehalten ist: bitte umformulieren."
 offerings:
   title: "Leistungen"
   description: "Fortbildungen, Vorträge und Beratung: was angeboten wird, für wen, wie, und wie man ein Angebot anfragt."
@@ -60,7 +54,6 @@ admin:
   offering:
     title: "Titel"
     activity: "Art"
-    activity_guarded: "Berufsrechtlich vorbehaltene Tätigkeiten werden nicht angeboten (RegulatedActivityGuard)."
     summary: "In einem Satz"
     description: "Vorstellung"
     audience: "Für wen"

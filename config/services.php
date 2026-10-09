@@ -23,6 +23,7 @@ return function (ContainerConfigurator $configurator) {
             $src.'/Enum/',
             $src.'/Exception/',
             $src.'/Form/Model/',
+            $src.'/Offering/OfferingViolation.php',
             $src.'/Controller/Admin/',
             $src.'/Admin/',
             $src.'/ConsultingBundle.php',

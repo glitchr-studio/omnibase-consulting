@@ -4,13 +4,7 @@ activity:
   consulting: "Consulting"
   information: "Documentary information"
   writing: "Content writing"
-  legal_consultation: "Personalised legal consultation"
-  deed_drafting: "Drafting deeds for others"
   other: "Other"
-guard:
-  legal_consultation: "A personalised legal consultation is reserved to the professions allowed to give it (French law of 31 December 1971, art. 54 ff.). Present it as training or documentary information, or set the status that allows it (consulting.authorized_status)."
-  deed_drafting: "Drafting deeds for others is reserved to the professions allowed to (French law of 31 December 1971, art. 54)."
-  wording: "The text announces personalised legal advice, reserved to the allowed professions (French law of 31 December 1971, art. 54): reword it."
 offerings:
   title: "Services"
   description: "Professional development, talks and consulting: what is offered, for whom, how, and how to ask for a quote."
@@ -60,7 +54,6 @@ admin:
   offering:
     title: "Title"
     activity: "Kind"
-    activity_guarded: "The activities reserved to regulated professions are not offered (RegulatedActivityGuard)."
     summary: "In one sentence"
     description: "Presentation"
     audience: "For whom"

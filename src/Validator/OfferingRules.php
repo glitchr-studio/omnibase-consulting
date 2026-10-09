@@ -4,9 +4,9 @@ namespace Base\Consulting\Validator;
 
 use Symfony\Component\Validator\Constraint;
 
-/** The offering stays clear of what only a regulated profession may do (Service\RegulatedActivityGuard). */
+/** The offering keeps every rule the site has (Base\Consulting\Offering\OfferingRuleInterface). */
 #[\Attribute(\Attribute::TARGET_CLASS)]
-final class RegulatedActivity extends Constraint
+final class OfferingRules extends Constraint
 {
     public function getTargets(): string
     {

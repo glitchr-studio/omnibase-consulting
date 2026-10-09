@@ -4,7 +4,7 @@ namespace Base\Consulting\Entity;
 
 use Base\Consulting\Enum\Activity;
 use Base\Consulting\Repository\OfferingRepository;
-use Base\Consulting\Validator\RegulatedActivity;
+use Base\Consulting\Validator\OfferingRules;
 use Base\Database\Attribute\Uploader;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * A service the site offers: a teachers' workshop, a keynote, a show, a
- * training, a consultation. What it is (its activity, as the law reads it),
+ * training, a consultation. What it is (its activity),
  * who it is for, how it runs and for how long, its price as it should be
  * printed ("On quote", "From €1,500 excl. VAT"), a picture, and whether a
  * quote may be asked for it. `hours`: a package of hours, the point where
@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: OfferingRepository::class)]
 #[ORM\Table(name: 'consulting_offering')]
 #[UniqueEntity(fields: ['slug'])]
-#[RegulatedActivity]
+#[OfferingRules]
 class Offering
 {
     #[ORM\Id]
@@ -170,7 +170,7 @@ class Offering
     public function isVisible(): bool { return $this->visible; }
     public function setVisible(bool $visible): self { $this->visible = $visible; return $this; }
 
-    /** Every word of it, for the guard to read. */
+    /** Every word of it, for a rule to read (Offering\OfferingRuleInterface). */
     public function getText(): string
     {
         return trim(implode("\n", array_filter([$this->title, $this->summary, strip_tags((string) $this->description)])));

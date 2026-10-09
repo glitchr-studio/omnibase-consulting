@@ -4,13 +4,7 @@ activity:
   consulting: "Conseil"
   information: "Information documentaire"
   writing: "Rédaction de contenus"
-  legal_consultation: "Consultation juridique personnalisée"
-  deed_drafting: "Rédaction d'actes pour autrui"
   other: "Autre"
-guard:
-  legal_consultation: "Une consultation juridique personnalisée est réservée aux professions qui y sont autorisées (loi du 31 décembre 1971, art. 54 et suivants). Présentez-la comme une formation ou une information documentaire, ou indiquez le statut qui vous y autorise (consulting.authorized_status)."
-  deed_drafting: "La rédaction d'actes pour autrui est réservée aux professions qui y sont autorisées (loi du 31 décembre 1971, art. 54)."
-  wording: "Le texte annonce une consultation ou un conseil juridique personnalisé, réservé aux professions autorisées (loi du 31 décembre 1971, art. 54) : reformulez-le."
 offerings:
   title: "Prestations"
   description: "Formations, conférences et accompagnement : ce qui est proposé, pour qui, comment, et comment demander un devis."
@@ -60,7 +54,6 @@ admin:
   offering:
     title: "Titre"
     activity: "Nature"
-    activity_guarded: "Les activités réservées aux professions réglementées ne sont pas proposées (RegulatedActivityGuard)."
     summary: "En une phrase"
     description: "Présentation"
     audience: "Pour qui"

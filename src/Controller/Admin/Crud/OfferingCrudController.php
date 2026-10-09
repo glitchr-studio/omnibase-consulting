@@ -6,7 +6,6 @@ use Base\Admin\Attribute\OpenToAdmins;
 use Base\Admin\Controller\AbstractCrudController;
 use Base\Consulting\Entity\Offering;
 use Base\Consulting\Enum\Activity;
-use Base\Consulting\Service\RegulatedActivityGuard;
 use Base\Field\BooleanField;
 use Base\Field\EditorField;
 use Base\Field\IdField;
@@ -20,22 +19,20 @@ use Symfony\Contracts\Service\Attribute\Required;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * What the site offers: each service's activity (a reserved one is not
- * offered when the RegulatedActivityGuard is on), its texts, for whom, how,
+ * What the site offers: each service's activity, its texts, for whom, how,
  * how long, its price as printed, a package of hours, a picture, whether a
- * quote may be asked.
+ * quote may be asked. What the site's rules refuse (Offering\OfferingRuleInterface)
+ * is printed under the field it concerns.
  */
 #[OpenToAdmins]
 class OfferingCrudController extends AbstractCrudController
 {
     private ?TranslatorInterface $translator = null;
-    private ?RegulatedActivityGuard $guard = null;
 
     #[Required]
-    public function setConsultingServices(TranslatorInterface $translator, RegulatedActivityGuard $guard): void
+    public function setConsultingServices(TranslatorInterface $translator): void
     {
         $this->translator = $translator;
-        $this->guard = $guard;
     }
 
     public static function getEntityFqcn(): string
@@ -51,15 +48,14 @@ class OfferingCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $activities = [];
-        foreach ($this->guard?->allowedActivities() ?? [] as $activity) {
+        foreach (Activity::cases() as $activity) {
             $activities[$this->translator?->trans($activity->label(), [], 'consulting') ?? $activity->value] = $activity->value;
         }
 
         yield IdField::new('id')->onlyOnIndex();
         yield TextField::new('title', '@consulting.admin.offering.title')->setColumns(8);
-        // The enum's cases, among those the guard allows: the record receives the case.
-        $activity = SelectField::new('activity', '@consulting.admin.offering.activity')->setClass(Activity::class)->setChoices($activities)->setColumns(4);
-        yield $this->guard?->isEnabled() ? $activity->setHelp('@consulting.admin.offering.activity_guarded') : $activity;
+        // The enum's cases: the record receives the case.
+        yield SelectField::new('activity', '@consulting.admin.offering.activity')->setClass(Activity::class)->setChoices($activities)->setColumns(4);
         yield SlugField::new('slug')->setColumns(6)->hideOnIndex();
         yield TextareaField::new('summary', '@consulting.admin.offering.summary')->setRequired(false)->hideOnIndex();
         yield EditorField::new('description', '@consulting.admin.offering.description')->setRequired(false)->hideOnIndex();

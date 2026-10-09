@@ -18,8 +18,6 @@ consulting_controller:
 consulting:
     recipient: '%env(MAILER_CONTACT)%'   # where a quote request is sent
     provider: ~                           # who provides the services (schema.org); ~: base.settings.title
-    regulated_activity_guard: false       # see regulated-activity.md
-    authorized_status: ~                  # lawyer, notary, teacher, regulated_profession
     retention_months: 36                  # how long a request is kept (the notice says so)
 ```
 
